@@ -16,6 +16,8 @@ namespace PushSharp.Apple
 		/// </summary>
 		public AppleNotificationAlert()
 		{
+            Title = null;
+            Subtitle = null;
 			Body = null;
 			ActionLocalizedKey = null;
 			LocalizedKey = null;
@@ -23,19 +25,37 @@ namespace PushSharp.Apple
             LaunchImage = null;
 		}
 
-		/// <summary>
-		/// Body Text of the Notification's Alert
+        /// <summary>
+		/// Title Text of the Notification's Alert
 		/// </summary>
-		public string Body
+		public string Title
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+		/// Subtitle Text of the Notification's Alert
+		/// </summary>
+		public string Subtitle
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Body Text of the Notification's Alert
+        /// </summary>
+        public string Body
 		{
 			get;
 			set;
 		}
 
-		/// <summary>
-		/// Action Button's Localized Key
-		/// </summary>
-		public string ActionLocalizedKey
+        /// <summary>
+        /// Action Button's Localized Key
+        /// </summary>
+        public string ActionLocalizedKey
 		{
 			get;
 			set;

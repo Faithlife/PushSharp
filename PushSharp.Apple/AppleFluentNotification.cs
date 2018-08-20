@@ -31,7 +31,27 @@ namespace PushSharp
 			return n;
 		}
 
-        public static AppleNotification WithAlert(this AppleNotification n, string body, string launchImage)
+        public static AppleNotification WithAlert(this AppleNotification n, string body, string title)
+        {
+            if (n.Payload == null)
+                n.Payload = new AppleNotificationPayload();
+
+            n.Payload.Alert = new AppleNotificationAlert() { Body = body, Title = title};
+
+            return n;
+        }
+
+        public static AppleNotification WithAlert(this AppleNotification n, string body, string title, string subtitle)
+        {
+            if (n.Payload == null)
+                n.Payload = new AppleNotificationPayload();
+
+            n.Payload.Alert = new AppleNotificationAlert() { Body = body, Title = title, Subtitle = subtitle };
+
+            return n;
+        }
+
+        public static AppleNotification WithAlertImage(this AppleNotification n, string body, string launchImage)
         {
             if (n.Payload == null)
                 n.Payload = new AppleNotificationPayload();
@@ -101,7 +121,37 @@ namespace PushSharp
 			return n;
 		}
 
-		public static AppleNotification WithPayload(this AppleNotification n, AppleNotificationPayload payload)
+        public static AppleNotification WithMutableContent(this AppleNotification n, int mutableContent)
+        {
+            if (n.Payload == null)
+                n.Payload = new AppleNotificationPayload();
+
+            n.Payload.MutableContent = mutableContent;
+
+            return n;
+        }
+
+        public static AppleNotification WithCategory(this AppleNotification n, string category)
+        {
+            if (n.Payload == null)
+                n.Payload = new AppleNotificationPayload();
+
+            n.Payload.Category = category;
+
+            return n;
+        }
+
+        public static AppleNotification WithThreadId(this AppleNotification n, string threadId)
+        {
+            if (n.Payload == null)
+                n.Payload = new AppleNotificationPayload();
+
+            n.Payload.ThreadId = threadId;
+
+            return n;
+        }
+
+        public static AppleNotification WithPayload(this AppleNotification n, AppleNotificationPayload payload)
 		{
 			n.Payload = payload;
 
