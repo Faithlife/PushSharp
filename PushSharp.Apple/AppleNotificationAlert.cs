@@ -16,11 +16,31 @@ namespace PushSharp.Apple
 		/// </summary>
 		public AppleNotificationAlert()
 		{
+			Title = null;
+			Subtitle = null;
 			Body = null;
 			ActionLocalizedKey = null;
 			LocalizedKey = null;
 			LocalizedArgs = new List<object>();
-            LaunchImage = null;
+			LaunchImage = null;
+		}
+
+		/// <summary>
+		/// Title Text of the Notification's Alert
+		/// </summary>
+		public string Title
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Subtitle Text of the Notification's Alert
+		/// </summary>
+		public string Subtitle
+		{
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -64,15 +84,15 @@ namespace PushSharp.Apple
 			this.LocalizedArgs.AddRange(values);
 		}
 
-        /// <summary>
-        /// Filename of the Lauch Image (with ou without extension)
-        /// >= iOS 4.0
-        /// </summary>
-        public string LaunchImage
-        {
-            get;
-            set;
-        }
+		/// <summary>
+		/// Filename of the Lauch Image (with ou without extension)
+		/// >= iOS 4.0
+		/// </summary>
+		public string LaunchImage
+		{
+			get;
+			set;
+		}
 
 		/// <summary>
 		/// Determines if the Alert is empty and should be excluded from the Notification Payload
@@ -85,8 +105,8 @@ namespace PushSharp.Apple
 					|| !string.IsNullOrEmpty(ActionLocalizedKey)
 					|| !string.IsNullOrEmpty(LocalizedKey)
 					|| (LocalizedArgs != null && LocalizedArgs.Count > 0)
-                    || !string.IsNullOrEmpty(LaunchImage)
-                    )
+					|| !string.IsNullOrEmpty(LaunchImage)
+					)
 					return false;
 				else
 					return true;
