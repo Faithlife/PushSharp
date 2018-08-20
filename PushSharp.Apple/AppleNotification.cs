@@ -46,7 +46,7 @@ namespace PushSharp.Apple
 		public const int DEVICE_TOKEN_BINARY_SIZE = 32;
 		public const int DEVICE_TOKEN_STRING_SIZE = 64;
 		public const int MAX_PAYLOAD_SIZE = 2048;
-        public static readonly DateTime DoNotStore = DateTime.MinValue;
+		public static readonly DateTime DoNotStore = DateTime.MinValue;
 		private static readonly DateTime UNIX_EPOCH = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
 		public AppleNotification()

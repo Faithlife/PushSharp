@@ -21,11 +21,11 @@ namespace PushSharp.Apple
 
 		public bool HideActionButton { get; set; }
 
-        public int? MutableContent { get; set; }
+		public int? MutableContent { get; set; }
 
-        public string Category { get; set; }
+		public string Category { get; set; }
 
-        public string ThreadId { get; set; }
+		public string ThreadId { get; set; }
 
 		public Dictionary<string, object[]> CustomItems
 		{
@@ -40,12 +40,12 @@ namespace PushSharp.Apple
 			CustomItems = new Dictionary<string, object[]>();
 		}
 
-        public AppleNotificationPayload(AppleNotificationAlert alert)
-        {
-            HideActionButton = false;
-            Alert = alert;
-            CustomItems = new Dictionary<string, object[]>();
-        }
+		public AppleNotificationPayload(AppleNotificationAlert alert)
+		{
+			HideActionButton = false;
+			Alert = alert;
+			CustomItems = new Dictionary<string, object[]>();
+		}
 
 		public AppleNotificationPayload(string alert)
 		{
@@ -71,58 +71,58 @@ namespace PushSharp.Apple
 			CustomItems = new Dictionary<string, object[]>();
 		}
 
-        public AppleNotificationPayload(AppleNotificationAlert alert, int badge, int mutableContent)
-        {
-            HideActionButton = false;
-            Alert = alert;
-            Badge = badge;
-            CustomItems = new Dictionary<string, object[]>();
-            MutableContent = mutableContent;
-        }
+		public AppleNotificationPayload(AppleNotificationAlert alert, int badge, int mutableContent)
+		{
+			HideActionButton = false;
+			Alert = alert;
+			Badge = badge;
+			CustomItems = new Dictionary<string, object[]>();
+			MutableContent = mutableContent;
+		}
 
-        public AppleNotificationPayload(AppleNotificationAlert alert, int badge, string sound, int mutableContent)
-        {
-            HideActionButton = false;
-            Alert = alert;
-            Badge = badge;
-            Sound = sound;
-            CustomItems = new Dictionary<string, object[]>();
-            MutableContent = mutableContent;
-        }
+		public AppleNotificationPayload(AppleNotificationAlert alert, int badge, string sound, int mutableContent)
+		{
+			HideActionButton = false;
+			Alert = alert;
+			Badge = badge;
+			Sound = sound;
+			CustomItems = new Dictionary<string, object[]>();
+			MutableContent = mutableContent;
+		}
 
-        public AppleNotificationPayload(AppleNotificationAlert alert, int badge, int mutableContent, string category)
-        {
-            HideActionButton = false;
-            Alert = alert;
-            Badge = badge;
-            CustomItems = new Dictionary<string, object[]>();
-            MutableContent = mutableContent;
-            Category = category;
-        }
+		public AppleNotificationPayload(AppleNotificationAlert alert, int badge, int mutableContent, string category)
+		{
+			HideActionButton = false;
+			Alert = alert;
+			Badge = badge;
+			CustomItems = new Dictionary<string, object[]>();
+			MutableContent = mutableContent;
+			Category = category;
+		}
 
-        public AppleNotificationPayload(AppleNotificationAlert alert, int badge, string sound, int mutableContent, string category)
-        {
-            HideActionButton = false;
-            Alert = alert;
-            Badge = badge;
-            Sound = sound;
-            CustomItems = new Dictionary<string, object[]>();
-            MutableContent = mutableContent;
-            Category = category;
-        }
+		public AppleNotificationPayload(AppleNotificationAlert alert, int badge, string sound, int mutableContent, string category)
+		{
+			HideActionButton = false;
+			Alert = alert;
+			Badge = badge;
+			Sound = sound;
+			CustomItems = new Dictionary<string, object[]>();
+			MutableContent = mutableContent;
+			Category = category;
+		}
 
-        public AppleNotificationPayload(string alert, int badge, string sound, int mutableContent, string category)
-        {
-            HideActionButton = false;
-            Alert = new AppleNotificationAlert() { Body = alert };
-            Badge = badge;
-            Sound = sound;
-            CustomItems = new Dictionary<string, object[]>();
-            MutableContent = mutableContent;
-            Category = category;
-        }
+		public AppleNotificationPayload(string alert, int badge, string sound, int mutableContent, string category)
+		{
+			HideActionButton = false;
+			Alert = new AppleNotificationAlert() { Body = alert };
+			Badge = badge;
+			Sound = sound;
+			CustomItems = new Dictionary<string, object[]>();
+			MutableContent = mutableContent;
+			Category = category;
+		}
 
-        public void AddCustom(string key, params object[] values)
+		public void AddCustom(string key, params object[] values)
 		{
 			if (values != null)
 				this.CustomItems.Add(key, values);
@@ -136,48 +136,48 @@ namespace PushSharp.Apple
 
 			if (!this.Alert.IsEmpty)
 			{
-                if (!string.IsNullOrEmpty(this.Alert.Body)
-                    && string.IsNullOrEmpty(this.Alert.LocalizedKey)
-                    && string.IsNullOrEmpty(this.Alert.ActionLocalizedKey)
-                    && (this.Alert.LocalizedArgs == null || this.Alert.LocalizedArgs.Count <= 0)
-                    && string.IsNullOrEmpty(this.Alert.LaunchImage)
-                    && !this.HideActionButton)
-                {
-                    JObject jsonAlert = new JObject();
+				if (!string.IsNullOrEmpty(this.Alert.Body)
+					&& string.IsNullOrEmpty(this.Alert.LocalizedKey)
+					&& string.IsNullOrEmpty(this.Alert.ActionLocalizedKey)
+					&& (this.Alert.LocalizedArgs == null || this.Alert.LocalizedArgs.Count <= 0)
+					&& string.IsNullOrEmpty(this.Alert.LaunchImage)
+					&& !this.HideActionButton)
+				{
+					JObject jsonAlert = new JObject();
 
-                    if (!string.IsNullOrEmpty(this.Alert.Title))
-                        jsonAlert["title"] = new JValue(this.Alert.Title);
+					if (!string.IsNullOrEmpty(this.Alert.Title))
+						jsonAlert["title"] = new JValue(this.Alert.Title);
 
-                    jsonAlert["body"] = new JValue(this.Alert.Body);
+					jsonAlert["body"] = new JValue(this.Alert.Body);
 
-                    aps["alert"] = jsonAlert;
-                }
-                else
-                {
-                    JObject jsonAlert = new JObject();
+					aps["alert"] = jsonAlert;
+				}
+				else
+				{
+					JObject jsonAlert = new JObject();
 
-                    if (!string.IsNullOrEmpty(this.Alert.LocalizedKey))
-                        jsonAlert["loc-key"] = new JValue(this.Alert.LocalizedKey);
+					if (!string.IsNullOrEmpty(this.Alert.LocalizedKey))
+						jsonAlert["loc-key"] = new JValue(this.Alert.LocalizedKey);
 
-                    if (this.Alert.LocalizedArgs != null && this.Alert.LocalizedArgs.Count > 0)
-                        jsonAlert["loc-args"] = new JArray(this.Alert.LocalizedArgs.ToArray());
+					if (this.Alert.LocalizedArgs != null && this.Alert.LocalizedArgs.Count > 0)
+						jsonAlert["loc-args"] = new JArray(this.Alert.LocalizedArgs.ToArray());
 
-                    if (!string.IsNullOrEmpty(this.Alert.Title))
-                        jsonAlert["title"] = new JValue(this.Alert.Body);
+					if (!string.IsNullOrEmpty(this.Alert.Title))
+						jsonAlert["title"] = new JValue(this.Alert.Body);
 
-                    if (!string.IsNullOrEmpty(this.Alert.Body))
-                        jsonAlert["body"] = new JValue(this.Alert.Body);
+					if (!string.IsNullOrEmpty(this.Alert.Body))
+						jsonAlert["body"] = new JValue(this.Alert.Body);
 
-                    if (this.HideActionButton)
-                        jsonAlert["action-loc-key"] = new JValue((string)null);
-                    else if (!string.IsNullOrEmpty(this.Alert.ActionLocalizedKey))
-                        jsonAlert["action-loc-key"] = new JValue(this.Alert.ActionLocalizedKey);
+					if (this.HideActionButton)
+						jsonAlert["action-loc-key"] = new JValue((string)null);
+					else if (!string.IsNullOrEmpty(this.Alert.ActionLocalizedKey))
+						jsonAlert["action-loc-key"] = new JValue(this.Alert.ActionLocalizedKey);
 
-                    if (!string.IsNullOrEmpty(this.Alert.LaunchImage))
-                        jsonAlert["launch-image"] = new JValue(this.Alert.LaunchImage);
+					if (!string.IsNullOrEmpty(this.Alert.LaunchImage))
+						jsonAlert["launch-image"] = new JValue(this.Alert.LaunchImage);
 
-                    aps["alert"] = jsonAlert;
-                }
+					aps["alert"] = jsonAlert;
+				}
 			}
 
 			if (this.Badge.HasValue)
@@ -189,16 +189,16 @@ namespace PushSharp.Apple
 			if (this.ContentAvailable.HasValue)
 				aps["content-available"] = new JValue(this.ContentAvailable.Value);
 
-            if (this.MutableContent.HasValue)
-                aps["mutable-content"] = new JValue(this.MutableContent.Value);
+			if (this.MutableContent.HasValue)
+				aps["mutable-content"] = new JValue(this.MutableContent.Value);
 
-            if (!string.IsNullOrEmpty(this.Category))
-                aps["category"] = new JValue(this.Category);
+			if (!string.IsNullOrEmpty(this.Category))
+				aps["category"] = new JValue(this.Category);
 
-            if (!string.IsNullOrEmpty(this.ThreadId))
-                aps["thread-id"] = new JValue(this.ThreadId);
+			if (!string.IsNullOrEmpty(this.ThreadId))
+				aps["thread-id"] = new JValue(this.ThreadId);
 
-            if (aps.Count > 0)
+			if (aps.Count > 0)
 				json["aps"] = aps;
 
 			foreach (string key in this.CustomItems.Keys)
