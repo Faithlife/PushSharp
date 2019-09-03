@@ -81,8 +81,11 @@ namespace PushSharp.Apple
 
 		public override bool IsValidDeviceRegistrationId()
 		{
-			var r = new System.Text.RegularExpressions.Regex(@"^[0-9A-F]+$", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-			return r.Match(this.DeviceToken).Success;
+			// Apple hasn't published the format of their token, so this check may be causing
+			// all sorts of problems. Disabled 8/3/2019
+			//var r = new System.Text.RegularExpressions.Regex(@"^[0-9A-F]+$", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+			//return r.Match(this.DeviceToken).Success;
+			return !string.IsNullOrEmpty(DeviceToken);
 		}
 
 		public override string ToString()
