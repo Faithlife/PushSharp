@@ -76,7 +76,7 @@ namespace PushSharp.Apple
 			}
 		}
 
-		public override string ToString()
+		public string ToString_legacy()
 		{
 			var nstr = string.Empty;
 
@@ -85,6 +85,11 @@ namespace PushSharp.Apple
 
 			return string.Format("APNS NotificationFailureException -> {0} : {1} -> {2}", ErrorStatusCode, ErrorStatusDescription, nstr);
 		}
+
+		public override string ToString()
+		{
+			return string.Format("APNS NotificationFailureException -> {0} : {1}", ErrorStatusCode, ErrorStatusDescription);
+		}
 	}
-	
+
 }
