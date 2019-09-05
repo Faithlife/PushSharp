@@ -57,7 +57,13 @@ namespace PushSharp.Apple
 						msg = "Invalid payload size";
 						break;
 					case 8:
-						msg = "Invalid token";
+						msg = $"Invalid token - {Notification.DeviceToken}";
+						break;
+					case 253:
+						msg = $"Invalid token(1) - {Notification.DeviceToken}";
+						break;
+					case 254:
+						msg = $"Invalid token(2) - {Notification.DeviceToken}";
 						break;
 					case 255:
 						msg = "None (unknown)";

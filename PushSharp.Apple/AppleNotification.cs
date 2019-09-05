@@ -120,13 +120,13 @@ namespace PushSharp.Apple
 				throw new NotificationFailureException (2, this);
 
 			if (!IsValidDeviceRegistrationId ())
-				throw new NotificationFailureException (8, this);
+				throw new NotificationFailureException (253, this);
 
 			byte[] deviceToken = new byte[DeviceToken.Length / 2];
 			for (int i = 0; i < deviceToken.Length; i++)
 			{
 				try { deviceToken[i] = byte.Parse(DeviceToken.Substring(i*2, 2), System.Globalization.NumberStyles.HexNumber); }
-				catch (Exception) { throw new NotificationFailureException(8, this); }
+				catch (Exception) { throw new NotificationFailureException(254, this); }
 			}
 
 			if (deviceToken.Length != DEVICE_TOKEN_BINARY_SIZE)
